@@ -22,6 +22,7 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("контрактные тесты сервиса x-clients>")
 public class ContractTests {
     EmployeeHelper helper;
     AuthResponse auth = EmployeeHelper.auth(getProperty("app_user.login"), getProperty("app_user.password"));

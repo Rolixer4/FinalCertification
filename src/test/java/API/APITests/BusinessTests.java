@@ -28,6 +28,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+@DisplayName("Бизнес тесты сервиса x-clients>")
 public class BusinessTests {
     EmployeeHelper helper;
     AuthResponse auth = EmployeeHelper.auth(getProperty("app_user.login"), getProperty("app_user.password"));
