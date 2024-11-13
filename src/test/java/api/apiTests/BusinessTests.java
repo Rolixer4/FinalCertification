@@ -28,7 +28,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@DisplayName("Бизнес тесты сервиса x-clients>")
+@DisplayName("Бизнес тесты сервиса x-clients")
 public class BusinessTests {
     EmployeeHelper helper;
     AuthResponse auth = EmployeeHelper.auth(getProperty("app_user.login"), getProperty("app_user.password"));
@@ -168,11 +168,11 @@ public class BusinessTests {
 
         EmployeeEntity assertEmployee = entityManager.find(EmployeeEntity.class, testId);
 
-        step("Проверяем, что новая фамилия не равна измененной фамилии", () -> assertEquals(testEmployee.lastName(), assertEmployee.getLastName()));
-        step("Проверяем, что новый email не равен измененному email", () -> assertEquals(testEmployee.email(), assertEmployee.getEmail()));
-        step("Проверяем, что новый сайт сотрудника не равен измененному сайту", () -> assertEquals(testEmployee.url(), assertEmployee.getUrl()));
-        step("Проверяем, что новый телефон не равен измененному телефону", () -> assertEquals(testEmployee.phone(), assertEmployee.getPhone()));
-        step("Проверяем, что статус не равен измененному статусу", () -> assertEquals(testEmployee.isActive(), assertEmployee.isActive()));
+        step("Проверяем, что новая фамилия равна фамилии, на которую произведена замена", () -> assertEquals(testEmployee.lastName(), assertEmployee.getLastName()));
+        step("Проверяем, что новый email равен email, на который произведена замена", () -> assertEquals(testEmployee.email(), assertEmployee.getEmail()));
+        step("Проверяем, что новый сайт сотрудника равен сайту, на который произведена замена", () -> assertEquals(testEmployee.url(), assertEmployee.getUrl()));
+        step("Проверяем, что новый телефон равен телефону, на который произведена замена", () -> assertEquals(testEmployee.phone(), assertEmployee.getPhone()));
+        step("Проверяем, что статус равен статусу, на который произведена замена", () -> assertEquals(testEmployee.isActive(), assertEmployee.isActive()));
     }
 
     @Test

@@ -3,9 +3,7 @@ package ui.tests;
 import ui.pom.*;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.*;
-
 import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static properties.GetProperties.getProperty;
 
@@ -49,15 +47,19 @@ public class SelenideTests {
     @DisplayName("Авторизация заблокированного юзера")
     @Tag("negative")
     public void blockedUserLogin() {
+        String errorTextToBe = "Epic sadface: Sorry, this user has been locked out.";
         loginPage.login(getProperty("LOCKED_USERNAME"), getProperty("PASSWORD"));
         loginPage.clickLogin();
-        assertEquals("Epic sadface: Sorry, this user has been locked out.", loginPage.getError());
+        assertEquals(errorTextToBe, loginPage.getError());
     }
 
     @Test
     @DisplayName("Сквозной сценарий пользователя standart_user")
     @Tag("positive")
     public void e2eStandardUser() {
+        String totalPriceText = "Total: $58.29";
+        String finalMessage = "Thank you for your order!";
+
         loginPage.login(getProperty("STANDARD_USERNAME"), getProperty("PASSWORD"));
         loginPage.clickLogin();
         productsPage.addToCart();
@@ -67,15 +69,18 @@ public class SelenideTests {
         checkoutPage.insertDataForm(getProperty("FIRST_NAME"), getProperty("LAST_NAME"), getProperty("POSTAL_CODE"));
         checkoutPage.clickContinue();
         overviewPage.checkItemsInOverview();
-        assertEquals("Total: $58.29", overviewPage.getTotalPrice());
+        assertEquals(totalPriceText, overviewPage.getTotalPrice());
         overviewPage.finishOrder();
-        assertEquals("Thank you for your order!", completePage.getCompleteMessage());
+        assertEquals(finalMessage, completePage.getCompleteMessage());
     }
 
     @Test
     @DisplayName("Сквозной сценарий пользователя performance_glitch_user")
     @Tag("positive")
     public void e2ePerformanceGlitchUser() {
+        String totalPriceText = "Total: $58.29";
+        String finalMessage = "Thank you for your order!";
+
         loginPage.login(getProperty("PERFORMANCE_GLITCH_USERNAME"), getProperty("PASSWORD"));
         loginPage.clickLogin();
         productsPage.addToCart();
@@ -85,8 +90,8 @@ public class SelenideTests {
         checkoutPage.insertDataForm(getProperty("FIRST_NAME"), getProperty("LAST_NAME"), getProperty("POSTAL_CODE"));
         checkoutPage.clickContinue();
         overviewPage.checkItemsInOverview();
-        assertEquals("Total: $58.29", overviewPage.getTotalPrice());
+        assertEquals(totalPriceText, overviewPage.getTotalPrice());
         overviewPage.finishOrder();
-        assertEquals("Thank you for your order!", completePage.getCompleteMessage());
+        assertEquals(finalMessage, completePage.getCompleteMessage());
     }
 }
