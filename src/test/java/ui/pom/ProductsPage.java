@@ -12,8 +12,7 @@ public class ProductsPage {
     public final Header header;
 
     public ProductsPage() {
-        this.header = new Header() {
-        };
+        this.header = new Header();
     }
 
     private final SelenideElement pageNameLocator = $(".title");
